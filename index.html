@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>free music | 02</title>
+  <link rel="stylesheet" href="aikon.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <style>
+
+
+.trail {
+      position: fixed;
+      pointer-events: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 8px #fff, 0 0 12px #0ff;
+      animation: fade 0.6s ease-out forwards;
+    }
+
+    @keyframes fade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+    }
+
+
+
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      text-decoration: wavy;
+    }
+
+    .wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      width: 300px;
+      margin-bottom: 30px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px 40px 10px 10px;
+      border-radius: 30px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .input-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .music-player {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .controls button {
+      font-size: 18px;
+      cursor: pointer;
+      background: none;
+      color: white;
+      border: none;
+    }
+
+    .volume-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .volume-control input[type="range"] {
+      width: 100px;
+    }
+
+    .bx-volume-full,
+    .bx-volume-mute {
+      color: white;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Noto Sans JP", sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: white;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .tab-buttons {
+      
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+
+
+    .tab-button {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      border-radius: 6px;
+      backdrop-filter: blur(5px);
+      transition: 0.3s;
+    }
+    .tab-button:hover,
+.tab-button.active {
+  background: rgba(0, 0, 0, 0.6); /* ← 少し濃い黒でホバー・アクティブ時の変化 */
+}
+
+
+    .tab-content {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .bio {
+      font-weight: 900;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+      border-bottom: 2px solid rgba(255,255,255,0.6);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    h1 {
+      font-weight: 900;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+      border-bottom: 2px solid rgba(255,255,255,0.6);
+      display: inline-block;
+      padding-bottom: 5px;
+      font-size: 2em;
+    }
+
+    .link-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .link-button {
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .link-button:hover {
+      background-color: rgba(88, 88, 88, 0.3);
+      transform: scale(1.05);
+    }
+
+    /* 背景動画設定 */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .bio {
+  display: block; /* ← 中央揃えを維持しつつ、上下にスペースを取る */
+  font-weight: 900;
+  font-size: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  border-bottom: 2px solid rgba(255,255,255,0.6);
+  padding-bottom: 5px;
+  margin: 15px auto 30px auto; /* ← 上下にしっかり余白を取る */
+  text-align: center;
+}
+
+
+#contact {
+  background-color: rgba(0, 0, 0, 0.4); /* 背景に黒み追加 */
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+}
+#contact p {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-size: 1rem;
+}
+
+
+  </style>
+</head>
+<body>
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="kireiな2700.mp4" type="video/mp4">
+    お使いのブラウザは動画タグをサポートしていません。
+  </video>
+
+  <!-- タブ切り替えボタン -->
+  <div class="tab-buttons">
+    <button class="tab-button active" onclick="showTab('main')">メイン</button>
+    <button class="tab-button" onclick="showTab('contact')">お問い合わせ</button>
+    <button class="tab-button" onclick="showTab('music')">音楽</button>
+  </div>
+
+  <!-- メインタブ内容 -->
+  <div id="main" class="tab-content active">
+    <h1>Kota Social Links</h1>
+    <div class="bio">にゃんこのチート代行してます</div>
+    <div class="link-container">
+      <a class="link-button" href="https://discord.gg/mTWGXvXETf" target="_blank">Discord server</a>
+      <a class="link-button" href="https://www.instagram.com/nyanko_script" target="_blank">Instagram</a>
+      <a class="link-button" href="https://twitter.com/yourname" target="_blank">X（旧Twitter）</a>
+      <a class="link-button" href="https://youtube.com/@script_0-c4t" target="_blank">YouTube</a>
+      <a class="link-button" href="https://www.tiktok.com/@02_script" target="_blank">TikTok</a>
+    </div>
+  </div>
+
+  <!-- お問い合わせタブ内容 -->
+  <div id="contact" class="tab-content">
+    <h1>お問い合わせ</h1>
+    <p style="margin-top: 20px; font-weight: bold;">基本的には Discord で対応しております。<br>以下のサーバーにご参加ください。</p>
+    <a class="link-button" href="https://discord.gg/mTWGXvXETf" target="_blank">Discordに参加する</a>
+  </div>
+
+
+
+  <!-- 🎵 音楽タブ内容 -->
+<div id="music" class="tab-content">
+  <h1>音楽プレイヤー</h1>
+  <p style="text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  border-bottom: 2px solid rgba(255,255,255,0.6);margin-top: 20px; font-weight: bold;">音楽再生をするには、再生ボタンを押してください。</p>
+  
+  
+  <!-- 🔍 曲検索 -->
+  <div class="search-container" style="text-align:center;">
+    <input type="text" id="searchInput" placeholder="曲名で検索" style="padding:10px; border-radius:100px; width: 100%; max-width:300px;">
+    <ul id="searchResults" style="list-style: none; padding: 0; margin-top: 10px;"></ul>
+  </div>
+
+  <!-- 🎵 音楽プレイヤー -->
+  <div class="music-player">
+    <div id="music-title">♪ タイトル表示中...</div>
+    <div class="controls">
+      <button id="prevBtn">⏮</button>
+      <button id="playPauseBtn">⏸</button>
+      <button id="nextBtn">⏭</button>
+      <span id="currentTime">0:00</span> /
+      <span id="duration">0:00</span>
+    </div>
+  </div>
+
+  <!-- 🔊 音量＆ミュート -->
+  <div class="volume-control">
+    <i class="bx bx-volume-full volume-icon" id="muteIcon"></i>
+    <input type="range" min="0" max="1" step="0.01" value="1" id="volumeSlider" />
+  </div>
+</div>
+
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</head>
+<body>
+
+  <canvas id="cursorCanvas"></canvas>
+
+
+  <div id="app">
+
+    <div id="hero">
+     
+    </div>
+  </div>
+
+ 
+    </form>
+  </div>
+
+  <!-- 🎵 オーディオタグ（1つだけ） -->
+  <audio id="bgm" autoplay></audio>
+
+  <script>
+    const audio = document.getElementById("bgm");
+    const titleDisplay = document.getElementById("music-title");
+    const currentTimeSpan = document.getElementById("currentTime");
+    const durationSpan = document.getElementById("duration");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slider = document.getElementById("volumeSlider");
+    const muteIcon = document.getElementById("muteIcon");
+
+    const playlist = [
+      { title: "愛にできることはまだあるかい", src: "愛にできることはまだあるかい.mp3" },
+      { title: "スパークル", src: "スパークル.mp3" },
+      { title: "ダーリン", src: "ダーリン.mp3"},
+      { title: "幾億光年", src: "幾億光年.mp3"},
+      { title: "bring-bang-bang-born", src: "bring-bang-bang-born.mp3"},
+      { title: "タイムパラドックス", src: "タイムパラドックス.mp3"},
+      { title: "APT", src: "APT.mp3"},
+      { title: "晩餐歌", src: "晩餐歌.mp3"},
+          { title: "ライラック", src: "ライラック.mp3"},
+  { title: "はいよろこんで", src: "はいよろこんで.mp3"},
+  { title: "最上級にかわいいの", src: "最上級にかわいいの.mp3"},
+  { title: "怪獣の花唄", src: " 怪獣の花唄.mp3"},
+  { title: "ドライフラワー", src: " ドライフラワー.mp3"},
+  { title: "マリーゴールド", src: " マリーゴールド.mp3"},
+  { title: "アイドル", src: " アイドル.mp3"},
+  { title: "life force", src: " life force.mp3"},
+  { title: "oiiacat", src: " oiiacat.mp3"},
+  { title: "soranji", src: " soranji.mp3"},
+  { title: "僕のこと", src: " 僕のこと.mp3"},
+  { title: "残酷な天使のテーゼ", src: " 残酷な天使のテーゼ.mp3"},
+  { title: "唱", src: " 唱.mp3"},
+  { title: "元彼女のみなさまへ", src: " 元彼女のみなさまへ.mp3"},
+  { title: "勇者", src: "勇者.mp3"},
+  { title: "ケセラセラ", src: "ケセラセラ.mp3"},
+  { title: "鬼の宴", src: " 鬼の宴.mp3"},
+  { title: "バニーガール", src: " バニーガール.mp3"},
+    ];
+
+    let currentIndex = 0;
+    let isPlaying = true;
+
+    function loadTrack(index) {
+      const track = playlist[index];
+      audio.src = track.src;
+      titleDisplay.textContent = `♪ ${track.title}`;
+      audio.load();
+      audio.play();
+      playPauseBtn.textContent = "⏸";
+      isPlaying = true;
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? "0" + s : s}`;
+    }
+
+    audio.addEventListener("loadedmetadata", () => {
+      durationSpan.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      currentTimeSpan.textContent = formatTime(audio.currentTime);
+    });
+
+    playPauseBtn.addEventListener("click", () => {
+      if (!audio.paused) {
+        audio.pause();
+        playPauseBtn.textContent = "▶";
+        isPlaying = false;
+      } else {
+        audio.play();
+        playPauseBtn.textContent = "⏸";
+        isPlaying = true;
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      loadTrack(currentIndex);
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+      loadTrack(currentIndex);
+    });
+
+    audio.addEventListener("ended", () => {
+      nextBtn.click();
+    });
+
+    slider.addEventListener("input", () => {
+      audio.volume = slider.value;
+      muteIcon.className = slider.value === "0"
+        ? "bx bx-volume-mute volume-icon"
+        : "bx bx-volume-full volume-icon";
+    });
+
+    muteIcon.addEventListener("click", () => {
+      if (audio.muted || audio.volume === 0) {
+        audio.muted = false;
+        audio.volume = slider.value = 1;
+        muteIcon.className = "bx bx-volume-full volume-icon";
+      } else {
+        audio.muted = true;
+        audio.volume = 0;
+        slider.value = 0;
+        muteIcon.className = "bx bx-volume-mute volume-icon";
+      }
+    });
+
+    // 初期ロード
+    window.addEventListener("DOMContentLoaded", () => {
+      loadTrack(currentIndex);
+    });
+
+    const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+// 🔍 検索処理
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase();
+  searchResults.innerHTML = "";
+
+  if (keyword.trim() === "") return;
+
+  playlist.forEach((track, index) => {
+    if (track.title.toLowerCase().includes(keyword)) {
+      const li = document.createElement("li");
+      li.textContent = track.title;
+      li.style.cursor = "pointer";
+      li.style.padding = "5px";
+      li.style.borderBottom = "1px solid #ccc";
+      li.addEventListener("click", () => {
+        currentIndex = index;
+        loadTrack(currentIndex);
+        searchResults.innerHTML = ""; // 検索結果を消す
+        searchInput.value = ""; // 入力欄リセット
+      });
+      searchResults.appendChild(li);
+    }
+  });
+});
+
+    
+
+document.addEventListener("mousemove", function(e) {
+      const trail = document.createElement("div");
+      trail.className = "trail";
+      trail.style.left = `${e.clientX}px`;
+      trail.style.top = `${e.clientY}px`;
+      document.body.appendChild(trail);
+      setTimeout(() => {
+        trail.remove();
+      }, 600); // フェードアウト後に削除
+    });
+
+
+
+  </script>
+</body>
+</html>
