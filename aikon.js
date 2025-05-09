@@ -82,11 +82,19 @@ function loadTrack(index) {
   const track = playlist[index];
   audio.src = track.src;
   titleDisplay.textContent = `♪ ${track.title}`;
-  audio.load();
-  audio.play();
   playPauseBtn.textContent = "⏸";
   isPlaying = true;
+
+  audio.load();
+
+  // ★ここで再生処理を canplaythrough に移動
+  audio.addEventListener("canplaythrough", function onReady() {
+    audio.play();
+    // イベントの多重登録を防ぐ
+    audio.removeEventListener("canplaythrough", onReady);
+  });
 }
+
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
