@@ -10,69 +10,31 @@ const muteIcon = document.getElementById("muteIcon");
 
 const playlist = [
   { title: "愛にできることはまだあるかい", src: "ainidekirukotohamadaarukai.mp3" },
-      { title: "スパークル", src: "supa-kuru.mp3" },
-      { title: "ダーリン", src: "da-rin.mp3"},
-      { title: "幾億光年", src: "ikuokukounenn.mp3"},
-      { title: "bring-bang-bang-born", src: "bring.mp3"},
-      { title: "タイムパラドックス", src: "taimuparadokkusu.mp3"},
-      { title: "APT", src: "APT.mp3"},
-      { title: "晩餐歌", src: "bansanka.mp3"},
-          { title: "ライラック", src: "rairakku.mp3"},
-  { title: "はいよろこんで", src: "haiyorokonnde.mp3"},
-  { title: "最上級にかわいいの", src: "saijoukyuu.mp3"},
-  { title: "怪獣の花唄", src: "kaijuunohanauta.mp3"},
-  { title: "ドライフラワー", src: "doraifurawa-.mp3"},
-  { title: "マリーゴールド", src: "mari-go-rudo.mp3"},
-  { title: "アイドル", src: "aidoru.mp3"},
-  { title: "life force", src: "lifeforce.mp3"},
-  { title: "oiiacat", src: "oiiacat.mp3"},
-  { title: "soranji", src: "soranji.mp3"},
-  { title: "僕のこと", src: "bokunokoto.mp3"},
-  { title: "残酷な天使のテーゼ", src: "zannkokunatennsinote-ze.mp3"},
-  { title: "唱", src: "shou.mp3"},
-  { title: "元彼女のみなさまへ", src: "motokanojonominasamahe.mp3"},
-  { title: "勇者", src: "yuusha.mp3"},
-  { title: "ケセラセラ", src: "keserasera.mp3"},
-  { title: "鬼の宴", src: "oninoutage.mp3"},
-  { title: "バニーガール", src: "bani-ga-ru.mp3"},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
-  { title: "", src: ""},
+  { title: "スパークル", src: "supa-kuru.mp3" },
+  { title: "ダーリン", src: "da-rin.mp3" },
+  { title: "幾億光年", src: "ikuokukounenn.mp3" },
+  { title: "bring-bang-bang-born", src: "bring.mp3" },
+  { title: "タイムパラドックス", src: "taimuparadokkusu.mp3" },
+  { title: "APT", src: "APT.mp3" },
+  { title: "晩餐歌", src: "bansanka.mp3" },
+  { title: "ライラック", src: "rairakku.mp3" },
+  { title: "はいよろこんで", src: "haiyorokonnde.mp3" },
+  { title: "最上級にかわいいの", src: "saijoukyuu.mp3" },
+  { title: "怪獣の花唄", src: "kaijuunohanauta.mp3" },
+  { title: "ドライフラワー", src: "doraifurawa-.mp3" },
+  { title: "マリーゴールド", src: "mari-go-rudo.mp3" },
+  { title: "アイドル", src: "aidoru.mp3" },
+  { title: "life force", src: "lifeforce.mp3" },
+  { title: "oiiacat", src: "oiiacat.mp3" },
+  { title: "soranji", src: "soranji.mp3" },
+  { title: "僕のこと", src: "bokunokoto.mp3" },
+  { title: "残酷な天使のテーゼ", src: "zannkokunatennsinote-ze.mp3" },
+  { title: "唱", src: "shou.mp3" },
+  { title: "元彼女のみなさまへ", src: "motokanojonominasamahe.mp3" },
+  { title: "勇者", src: "yuusha.mp3" },
+  { title: "ケセラセラ", src: "keserasera.mp3" },
+  { title: "鬼の宴", src: "oninoutage.mp3" },
+  { title: "バニーガール", src: "bani-ga-ru.mp3" }
 ];
 
 let currentIndex = 0;
@@ -85,29 +47,24 @@ function loadTrack(index) {
   playPauseBtn.textContent = "⏸";
   isPlaying = true;
 
-  // 既存の canplaythrough イベントを一旦削除（多重登録防止）
+  // 多重登録防止
   audio.removeEventListener("canplaythrough", onReady);
 
-  // 再生処理を定義（関数として定義して再登録を管理）
   function onReady() {
-    audio.play().catch((err) => {
+    audio.play().catch(err => {
       console.warn("再生失敗:", err);
     });
     audio.removeEventListener("canplaythrough", onReady);
   }
 
-  // 再生イベントを登録
   audio.addEventListener("canplaythrough", onReady);
-
-  // 読み込みを開始
   audio.load();
 }
-
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
-  return `${m}:${s < 10 ? '0' + s : s}`;
+  return `${m}:${s < 10 ? "0" + s : s}`;
 }
 
 audio.addEventListener("loadedmetadata", () => {
@@ -124,7 +81,9 @@ playPauseBtn.addEventListener("click", () => {
     playPauseBtn.textContent = "▶️";
     isPlaying = false;
   } else {
-    audio.play();
+    audio.play().catch(err => {
+      console.warn("再生失敗:", err);
+    });
     playPauseBtn.textContent = "⏸";
     isPlaying = true;
   }
@@ -147,29 +106,52 @@ audio.addEventListener("ended", () => {
 slider.addEventListener("input", () => {
   audio.volume = slider.value;
   muteIcon.className = slider.value === "0"
-    ? 'bx bx-volume-mute volume-icon'
-    : 'bx bx-volume-full volume-icon';
+    ? "bx bx-volume-mute volume-icon"
+    : "bx bx-volume-full volume-icon";
 });
 
 muteIcon.addEventListener("click", () => {
   if (audio.muted || audio.volume === 0) {
     audio.muted = false;
     audio.volume = slider.value = 1;
-    muteIcon.className = 'bx bx-volume-full volume-icon';
+    muteIcon.className = "bx bx-volume-full volume-icon";
   } else {
     audio.muted = true;
     slider.value = 0;
     audio.volume = 0;
-    muteIcon.className = 'bx bx-volume-mute volume-icon';
+    muteIcon.className = "bx bx-volume-mute volume-icon";
   }
 });
-
-
-
-
-
 
 // 初期読み込み
 window.addEventListener("DOMContentLoaded", () => {
   loadTrack(currentIndex);
+});
+
+// 🔍 検索処理
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase();
+  searchResults.innerHTML = "";
+
+  if (keyword.trim() === "") return;
+
+  playlist.forEach((track, index) => {
+    if (track.title.toLowerCase().includes(keyword)) {
+      const li = document.createElement("li");
+      li.textContent = track.title;
+      li.style.cursor = "pointer";
+      li.style.padding = "5px";
+      li.style.borderBottom = "1px solid #ccc";
+      li.addEventListener("click", () => {
+        currentIndex = index;
+        loadTrack(currentIndex);
+        searchResults.innerHTML = "";
+        searchInput.value = "";
+      });
+      searchResults.appendChild(li);
+    }
+  });
 });
