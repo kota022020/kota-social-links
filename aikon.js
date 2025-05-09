@@ -85,14 +85,22 @@ function loadTrack(index) {
   playPauseBtn.textContent = "⏸";
   isPlaying = true;
 
-  audio.load();
+  // 既存の canplaythrough イベントを一旦削除（多重登録防止）
+  audio.removeEventListener("canplaythrough", onReady);
 
-  // ★ここで再生処理を canplaythrough に移動
-  audio.addEventListener("canplaythrough", function onReady() {
-    audio.play();
-    // イベントの多重登録を防ぐ
+  // 再生処理を定義（関数として定義して再登録を管理）
+  function onReady() {
+    audio.play().catch((err) => {
+      console.warn("再生失敗:", err);
+    });
     audio.removeEventListener("canplaythrough", onReady);
-  });
+  }
+
+  // 再生イベントを登録
+  audio.addEventListener("canplaythrough", onReady);
+
+  // 読み込みを開始
+  audio.load();
 }
 
 
